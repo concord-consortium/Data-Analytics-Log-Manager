@@ -1,0 +1,13 @@
+db:  
+  image: "postgres:9.3"
+  expose:
+    - 5432
+web:  
+  build: .
+  command: rails server
+  volumes:
+    - .:/usr/src/app
+  ports:
+    - "3000:3000"
+  links:
+    - db
