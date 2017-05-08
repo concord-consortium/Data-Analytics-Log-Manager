@@ -187,7 +187,7 @@ class LogSpreadsheet < ActiveRecord::Base
     append_to_file "\n]", true
   end
 
-  def set_initial_status..
+  def set_initial_status
     update_status(STATUS_CREATED, 'Export job is waiting to be enqueued.')
   end
 end
