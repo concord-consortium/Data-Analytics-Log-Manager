@@ -35,7 +35,6 @@ class LogSpreadsheet < ActiveRecord::Base
   belongs_to :user
 
   after_create :set_initial_status
-  after_create :remove_old_spreadsheets
 
   # DO NOT load 'file' field by default, as it might be huge. Use #file_chunk instead!
   default_scope { select(LogSpreadsheet.attribute_names.select { |x| x != 'file' }) }
@@ -43,6 +42,14 @@ class LogSpreadsheet < ActiveRecord::Base
   def self.count
     # Default scope is breaking #count.
     LogSpreadsheet.unscoped.count
+  end
+
+  def self.remove_old_spreadsheets
+    keep = LogSpreadsheet.order(created_at: :desc).limit(SPREADSHEET_COUNT_LIMIT)
+    if keep.length > 0
+      limit = keep.last.created_at
+      LogSpreadsheet.where('created_at < ?', limit).destroy_all
+    end
   end
 
   def generate
@@ -180,12 +187,7 @@ class LogSpreadsheet < ActiveRecord::Base
     append_to_file "\n]", true
   end
 
-  def set_initial_status
+  def set_initial_status..
     update_status(STATUS_CREATED, 'Export job is waiting to be enqueued.')
-  end
-
-  def remove_old_spreadsheets
-    limit = LogSpreadsheet.order(created_at: :desc).limit(SPREADSHEET_COUNT_LIMIT).last.created_at
-    LogSpreadsheet.where('created_at < ?', limit).destroy_all
   end
 end
