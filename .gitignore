@@ -13,12 +13,19 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
+/log/*
 /tmp
 
 # Ignore the application's environment variable values
 /config/initializers/app_env_vars.rb
+config/database.yml
 
 # Ignore project files
 .idea
 
 node_modules
+
+#
+# Ignore docker-compose .env file
+#
+.env

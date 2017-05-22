@@ -22,7 +22,21 @@ Motivation
 --------
 Existing Web Analytics tools, like Google Analytics, do not provide logging data at the individual-user data, and so are not usable for certain kinds of analytics. Many of the projects would like to capture detailed logs of actions users take in browser-based activities. The application will act as a shared tool for logging the data, transforming it and using [CODAP](https://github.com/concord-consortium/codap) for visualization.
 
-Project Setup, Docker option
+
+Project Setup, Docker Compose option
+--------
+
+1. Clone the Log Manager repo. Optionally give the clone directory a more friendly name.
+  > E.g.  
+  `git clone https://github.com/concord-consortium/Data-Analytics-Log-Manager cc-log-manager`  
+
+2. From the root directory of the cloned repo, run: 
+  > `docker-compose up`
+3. By default, the UI should be available to a browser at `http://localhost:3000/`
+
+
+
+Project Setup, Docker Fig option
 --------
 
 This project includes a Dockerfile and a Fig (now [Docker Compose](http://blog.docker.com/2015/02/announcing-docker-compose/)) configuration that allows you to use containers based on prebuilt Rails and Postgres images, rather than having to install software
@@ -69,6 +83,7 @@ Project Setup, local install (no Docker)
 ### Run the following commands:
 
     cd Data-Analytics-Log-Manager/
+    cp config/database.sample.yml config/database.yml
     bundle install
     npm install
 
