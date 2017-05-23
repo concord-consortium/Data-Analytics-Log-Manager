@@ -58,7 +58,7 @@ class LogSpreadsheet < ActiveRecord::Base
 
     update_status(STATUS_PROCESSING, 'Executing SQL query...')
 
-    total   = Log.execute_query(query, user).count
+    total   = Log.execute_query(query, user, true).count
     logs    = Log.execute_query(query, user)
 
     if format == "json"
@@ -83,7 +83,7 @@ class LogSpreadsheet < ActiveRecord::Base
   end
 
   def logs_count
-    Log.execute_query(query, user).count
+    Log.execute_query(query, user, true).count
   end
 
   def too_big?
