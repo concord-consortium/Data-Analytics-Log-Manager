@@ -140,7 +140,7 @@ GEM
       railties (>= 4.0)
     multi_json (1.10.1)
     nested_form (0.3.2)
-    newrelic_rpm (3.10.0.279)
+    newrelic_rpm (4.6.0.338)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
     orm_adapter (0.5.0)
