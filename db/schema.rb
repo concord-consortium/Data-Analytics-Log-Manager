@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217185700) do
+ActiveRecord::Schema.define(version: 20180222153230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,16 +102,18 @@ ActiveRecord::Schema.define(version: 20170217185700) do
     t.string   "activity"
     t.string   "event"
     t.datetime "time"
-    t.hstore   "parameters",  default: {}, null: false
-    t.hstore   "extras",      default: {}, null: false
+    t.hstore   "parameters",          default: {}, null: false
+    t.hstore   "extras",              default: {}, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "event_value"
+    t.string   "run_remote_endpoint"
   end
 
   add_index "logs", ["activity"], name: "index_logs_on_activity", using: :btree
   add_index "logs", ["application"], name: "index_logs_on_application", using: :btree
   add_index "logs", ["event"], name: "index_logs_on_event", using: :btree
+  add_index "logs", ["run_remote_endpoint"], name: "index_logs_on_run_remote_endpoint", using: :btree
   add_index "logs", ["session"], name: "index_logs_on_session", using: :btree
   add_index "logs", ["time"], name: "index_logs_on_time", using: :btree
   add_index "logs", ["username"], name: "index_logs_on_username", using: :btree
