@@ -18,6 +18,17 @@ WORKDIR $APP_HOME
 RUN apt-get update && apt-get install -y npm
 
 #
+# update bundler since version in rails:4.1 is older
+#
+RUN gem install bundler
+
+#
+# Spring has a bug where it doesn't respect BUNDLER environment variables
+# https://github.com/rails/spring/issues/339
+#
+ADD docker/dev/spring.rb /root/.spring.rb
+
+#
 # Expose UI port
 #
 EXPOSE 3000
