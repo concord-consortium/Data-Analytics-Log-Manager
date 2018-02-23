@@ -134,66 +134,7 @@ class Log < ActiveRecord::Base
     time_columns    = logs_columns["time_columns"]
     hstore_columns  = logs_columns["hstore_columns"]
 
-    where_clause_filters = []
-
-    if count_only
-
-        #
-        # Check for special keys we handle in JOIN prior to WHERE clause.
-        # Should this be generic and handle *all* keys where list size is
-        # greater than some value?
-        #
-        # This should be used for filter lists that are too large to fit
-        # in the WHERE clause's IN (...) block.
-        #
-        filter_list.each do |filter|
-
-            key     = filter['key']
-            list    = filter['list']
-            remove  = filter['remove']
-
-            if  key == 'run_remote_endpoint'        &&
-                list.size > LARGE_FILTER_LIST_SIZE  &&
-                remove != true
-
-                #
-                # Create SQL safe strings for key and values
-                #
-                clean_key = Log.connection.quote_string(key)
-                clean_item_list = []
-                list.each do |item|
-                    clean_item_list.push(Log.connection.quote_string(item))
-                end
-
-                #
-                # Create join values
-                #
-                join_sql =  "INNER JOIN ( "
-                join_sql << "   VALUES "
-                join_sql << "       ('" << clean_item_list.join("'), ('") << "') "
-                join_sql << "   ) vals(v) ON "
-                join_sql << "( #{hstore_columns} -> '#{clean_key}' ) = v"
-
-                logs = logs.joins(join_sql)
-
-            else 
-
-                #
-                # Otherwise, handle this below in where clause.
-                #
-                where_clause_filters.push(filter)
-
-            end
-
-        end
-    else
-        where_clause_filters = filter_list
-    end
-
-    #
-    # Handle remaining filters here.
-    #
-    where_clause_filters.each do |filter|
+    filter_list.each do |filter|
 
       key = filter["key"]
 
