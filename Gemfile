@@ -62,6 +62,9 @@ gem 'rack-cors', '~> 0.3'
 # New Relic application monitoring
 gem 'newrelic_rpm'
 
+# for post to AWS server
+gem "httparty"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
