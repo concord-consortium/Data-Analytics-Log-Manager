@@ -1,53 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :data_queries
-  post 'data_queries/save'
+  # Let users know that this app is going to be disabled if they visit the main URL.
+  root 'pages#ui_disabled_info'
 
-  devise_for :admins, :skip => [:registrations]
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users
-  root 'pages#main'
-
-  resources :documents
-  resources :logs, only: [:index]
-  resources :log_spreadsheets, only: [] do
-    member do
-      # Returns JSON with status and status message.
-      get 'status'
-      # Returns spreadsheet file or HTTP 404 if spreadsheet is not generated yet.
-      get 'file'
-    end
-  end
-
-  get 'analytics/index'
-  post 'analytics/all'
-  get 'analytics/filter'
-  get 'analytics/group'
-  get 'analytics/transformation'
-  get 'analytics/measures'
-  get 'analytics/synthetic_data'
-
-  get 'pages/main'
-  get 'pages/about'
-  get 'pages/explore'
-  post 'pages/get_explore_data'
-
-  get 'data_interactive/index'
-  get 'data_interactive/export'
-  get 'di', to: 'data_interactive#index'
-
-  # Temporary Login Solution for CODAP hosted simultaneously with Rails (in Public folder)
-  post '/DataGames/api/auth/login', to: 'auth#index'
-
-  # devise_scope :user do
-  #   post "/api/auth/login", to: "devise/sessions#new"
-  # end
-
-  # Used for receiving form data from DataInteractive UI and apply appropriate transformation
-  post 'group_transform', to: 'group_transform#index'
-  post 'table_transform', to: 'table_transform#index'
-  post 'export_log_spreadsheet', to: 'export#log_spreadsheet'
-
+  # Keep API.
   namespace :api, defaults: {format: 'json'} do
 
     # To allow CORS request. The browser first sends an Options request which is matched to logs#options
@@ -67,6 +23,59 @@ Rails.application.routes.draw do
     post 'document/save'
 
   end
+
+  # Disable all non-API routes. Log Manager is going to be retired. For now, it should only accept new logs
+  # but users shouldn't be able to make any queries using its UI.
+  # --- OLD LOG MANAGER ROUTES ---
+  #
+  # resources :data_queries
+  # post 'data_queries/save'
+  #
+  # devise_for :admins, :skip => [:registrations]
+  # mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  # devise_for :users
+  #
+  # resources :documents
+  # resources :logs, only: [:index]
+  # resources :log_spreadsheets, only: [] do
+  #   member do
+  #     # Returns JSON with status and status message.
+  #     get 'status'
+  #     # Returns spreadsheet file or HTTP 404 if spreadsheet is not generated yet.
+  #     get 'file'
+  #   end
+  # end
+  #
+  # get 'analytics/index'
+  # post 'analytics/all'
+  # get 'analytics/filter'
+  # get 'analytics/group'
+  # get 'analytics/transformation'
+  # get 'analytics/measures'
+  # get 'analytics/synthetic_data'
+  #
+  # get 'pages/main'
+  # get 'pages/about'
+  # get 'pages/explore'
+  # post 'pages/get_explore_data'
+  #
+  # get 'data_interactive/index'
+  # get 'data_interactive/export'
+  # get 'di', to: 'data_interactive#index'
+  #
+  # # Temporary Login Solution for CODAP hosted simultaneously with Rails (in Public folder)
+  # post '/DataGames/api/auth/login', to: 'auth#index'
+  #
+  # # devise_scope :user do
+  # #   post "/api/auth/login", to: "devise/sessions#new"
+  # # end
+  #
+  # # Used for receiving form data from DataInteractive UI and apply appropriate transformation
+  # post 'group_transform', to: 'group_transform#index'
+  # post 'table_transform', to: 'table_transform#index'
+  # post 'export_log_spreadsheet', to: 'export#log_spreadsheet'
+  #
+  # --- END OF OLD LOG MANAGER ROUTES ---
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

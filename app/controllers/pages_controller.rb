@@ -2,6 +2,10 @@ class PagesController < ApplicationController
 
   before_action :authenticate_user!, only: [:explore, :get_explore_data]
 
+  def ui_disabled_info
+    render :layout => false
+  end
+
   def main
   end
 
