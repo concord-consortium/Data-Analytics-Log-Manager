@@ -1,5 +1,5 @@
-require 'spec_helper'
-
-RSpec.describe "data_interactive/index.html.erb", :type => :view do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
+# require 'spec_helper'
+#
+# RSpec.describe "data_interactive/index.html.erb", :type => :view do
+#   pending "add some examples to (or delete) #{__FILE__}"
+# end
