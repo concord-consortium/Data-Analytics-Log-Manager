@@ -61,7 +61,10 @@ module Api
           key == "parameters" || string_columns.include?(key) || time_columns.include?(key)
         end
 
-        # send log message to AWS log manager if defined
+        # first commit the log to the database
+        saved = new_log.save
+
+        # and then send the log message to the AWS log manager if defined
         if ENV["AWS_LOG_MANAGER_URL"]
           result = HTTParty.post(ENV["AWS_LOG_MANAGER_URL"], :body => log_data.to_json, :headers => {"Content-Type" => "application/json"})
           if result.code != 201
@@ -69,11 +72,7 @@ module Api
           end
         end
 
-        if new_log.save
-          return true, new_log
-        else
-          return false, new_log
-        end
+        return saved, new_log
       end
 
   end
