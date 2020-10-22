@@ -1,4 +1,4 @@
-FROM rails:4.1
+FROM ruby:2.2.10
 
 #
 # Set some env variables
@@ -18,9 +18,9 @@ WORKDIR $APP_HOME
 RUN apt-get update && apt-get install -y npm
 
 #
-# update bundler since version in rails:4.1 is older
+# update bundler since version in rails:4.2 is older
 #
-RUN gem install bundler
+RUN gem install bundler -v 1.17.3
 
 #
 # Spring has a bug where it doesn't respect BUNDLER environment variables

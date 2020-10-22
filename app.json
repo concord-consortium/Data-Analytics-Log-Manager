@@ -2,6 +2,7 @@
   "name": "Data-Analytics-Log-Manager",
   "scripts": {
   },
+  "stack": "heroku-16",
   "env": {
     "DEVISE_SECRET_KEY": {
       "required": true
