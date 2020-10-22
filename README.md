@@ -27,10 +27,10 @@ Project Setup, Docker Compose option
 --------
 
 1. Clone the Log Manager repo. Optionally give the clone directory a more friendly name.
-  > E.g.  
-  `git clone https://github.com/concord-consortium/Data-Analytics-Log-Manager cc-log-manager`  
+  > E.g.
+  `git clone https://github.com/concord-consortium/Data-Analytics-Log-Manager cc-log-manager`
 
-2. From the root directory of the cloned repo, run: 
+2. From the root directory of the cloned repo, run:
   > `docker-compose up`
 3. By default, the UI should be available to a browser at `http://localhost:3000/`
 
@@ -104,7 +104,7 @@ Either update the `username` and `password` with your existing user's value or c
 To run rails console:
 
     rails console
- 
+
 ### Configure Mailer:
 
 A user can use Log Manager only after confirming the account. By default, in development emails will be placed in files in tmp/mails.
@@ -141,4 +141,3 @@ Data Analytics Log Manager is released under the [MIT License](http://opensource
 Attribution
 --------
 Data Analytics Log Manager started as a Google Summer of Code Project. The project was done by [Peeyush Agarwal](https://github.com/apeeyush) and [The Concord Consortium](http://concord.org/) was the mentoring organization.
-
