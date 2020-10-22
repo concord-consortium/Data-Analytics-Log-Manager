@@ -19,7 +19,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # Official Sass port of Bootstrap http://getbootstrap.com/css/#sass
 gem 'bootstrap-sass', '~> 3.3.5'
 # Flexible authentication solution for Rails with Warden.
-gem 'devise'
+# gem 'devise'
 # A Scope & Engine based, clean, powerful, customizable and sophisticated paginator
 gem 'kaminari'
 # Rails forms made easy.
@@ -78,6 +78,9 @@ gem "httparty"
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# The controller-level `respond_to' feature has been extracted to the `responders` gem in rails 4.2
+gem 'responders', '~> 2.0'
 
 # Better Errors replaces the standard Rails error page with a much better and more useful error page
 # binding_of_caller gem added to use Better Errors' advanced features (REPL, local/instance variable inspection, pretty stack frame names)
