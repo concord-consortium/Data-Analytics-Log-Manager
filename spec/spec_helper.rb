@@ -49,13 +49,13 @@ RSpec.configure do |config|
   config.order = "random"
 
   # Used by feature tests (e.g. login_as).
-  config.include Warden::Test::Helpers
-  config.before :suite do
-    Warden.test_mode!
-  end
-  config.after :each do
-    Warden.test_reset!
-  end
+  # config.include Warden::Test::Helpers
+  # config.before :suite do
+  #   Warden.test_mode!
+  # end
+  # config.after :each do
+  #   Warden.test_reset!
+  # end
 
   Capybara.javascript_driver = :poltergeist
 

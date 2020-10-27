@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
 # Use a recent stable ruby
-ruby '2.1.5'
+ruby '2.2.10'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.4'
+gem 'rails', '~> 4.2.7.1'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -19,13 +19,15 @@ gem 'coffee-rails', '~> 4.0.0'
 # Official Sass port of Bootstrap http://getbootstrap.com/css/#sass
 gem 'bootstrap-sass', '~> 3.3.5'
 # Flexible authentication solution for Rails with Warden.
-gem 'devise'
+# gem 'devise'
 # A Scope & Engine based, clean, powerful, customizable and sophisticated paginator
 gem 'kaminari'
 # Rails forms made easy.
 gem 'simple_form'
 # RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data
-gem 'rails_admin'
+# removed this for rails 4.2 upgrade because it uses safe_yaml as a depedency which has a problem the the upgraded ruby version
+# we have already removed the routes for this so its no used anyway (other than in the initializer which I've also commented out)
+# gem 'rails_admin'
 # jquery-datatables gem for rails. Provides all the basic DataTables files, and a few extras.
 gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
 # The Knockout.js JavaScript library ready for the Rails asset pipeline.
@@ -76,6 +78,9 @@ gem "httparty"
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# The controller-level `respond_to' feature has been extracted to the `responders` gem in rails 4.2
+gem 'responders', '~> 2.0'
 
 # Better Errors replaces the standard Rails error page with a much better and more useful error page
 # binding_of_caller gem added to use Better Errors' advanced features (REPL, local/instance variable inspection, pretty stack frame names)

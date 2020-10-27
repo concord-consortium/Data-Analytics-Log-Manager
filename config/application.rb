@@ -29,14 +29,14 @@ module LogManager
 
     config.assets.paths << Rails.root.join('node_modules')
 
-    config.middleware.insert_before Warden::Manager, Rack::Cors, :debug => true, :logger => (-> { Rails.logger }) do
+    config.middleware.insert_before 0, Rack::Cors, :debug => true, :logger => (-> { Rails.logger }) do
       allow do
         origins '*'
         resource '/api/logs',
           headers: :any,
           methods: [:post, :options],
           credentials: false,
-          max_age: 1728000          
+          max_age: 1728000
       end
     end
 

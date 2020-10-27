@@ -18,9 +18,9 @@ module Api
     return unless params[:username].blank?
     render :json=>{:success=>false, :message=>"missing username parameter"}, :status=>422
   end
- 
+
   def invalid_login_attempt
-    warden.custom_failure!
+    # warden.custom_failure!
     render :json=> {:success=>false, :message=>"Error with your login or password"}, :status=>401
   end
 
